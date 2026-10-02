@@ -1,58 +1,52 @@
-# RimModManager
+RimModManager is a desktop mod manager for **RimWorld**. It aims to consolidate mod scanning, sorting, backup, Workshop management, log troubleshooting, and common utility tools into a single interface, thereby eliminating the need to manually browse folders or constantly switch between windows.
 
-RimModManager 是一个面向 **RimWorld** 的桌面模组管理器，目标是把模组扫描、排序、备份、工坊管理、日志排错和常用辅助工具放到一个界面里，减少手动翻文件夹和反复切窗口的成本。
+## Key Features
 
-当前仓库处于持续开发中，正在持续迭代和逐步整理成公开项目。
+- Mod scanning and list management
+- Load order viewing, saving, backup, and comparison
+- Rule editing, dependency handling, and issue alerts
+- Workshop and Git repository content management
+- Scanning and cleanup of residual mod files
+- Texture optimization utilities
+- Mod list export
+- Game log viewing and troubleshooting assistance
+- AI assistant capabilities
 
-## 主要功能
+## Tech Stack
 
-- 模组扫描与列表管理
-- 加载顺序查看、保存、备份与对比
-- 规则编辑、依赖关系与问题提示
-- Workshop / Git 仓库相关内容管理
-- 模组残留扫描与清理
-- 贴图优化辅助工具
-- 推荐清单导出
-- 游戏日志查看与排错辅助
-- AI 助手相关能力
+- Backend: Python 3.11
+- Frontend: Vue 3 + Vite
+- Desktop Shell: pywebview
+- Dependency Management: uv
+- Testing: pytest
+- Packaging: PyInstaller
 
-## 技术栈
+## Runtime Environment
 
-- 后端：Python 3.11
-- 前端：Vue 3 + Vite
-- 桌面壳：pywebview
-- 依赖管理：uv
-- 测试：pytest
-- 打包：PyInstaller
-
-## 运行环境
-
-当前项目主要按 **Windows 桌面应用** 设计和验证。
-
-运行前建议准备：
+The project is currently designed and validated primarily as a **Windows desktop application**. Prerequisites:
 
 - Python 3.11+
 - Node.js 18+
 - `uv`
-- Windows 上可用的 **WebView2 Runtime**
-- RimWorld 本体与需要管理的模组环境
+- **WebView2 Runtime** (for Windows)
+- RimWorld base game and the mod environment to be managed
 
-## 快速开始
+## Quick Start
 
-### 1. 克隆仓库
+### 1. Clone the repository
 
 ```powershell
 git clone <your-repo-url>
 cd RimModManager
 ```
 
-### 2. 安装 Python 依赖
+### 2. Install Python dependencies
 
 ```powershell
 uv sync
 ```
 
-### 3. 安装前端依赖
+### 3. Install frontend dependencies
 
 ```powershell
 cd frontend
@@ -60,32 +54,32 @@ npm install
 cd ..
 ```
 
-## 启动方式
+## Launch Methods
 
-### 方式一：前端开发模式
+### Method 1: Frontend Development Mode
 
-先启动前端开发服务器：
+Start the frontend development server first:
 
 ```powershell
 cd frontend
 npm run dev
 ```
 
-再回到项目根目录启动桌面应用：
+Then return to the project root directory to launch the desktop application:
 
 ```powershell
 cd ..
 uv run python main.py
 ```
 
-说明：
+Notes:
 
-- 当前端开发服务器 `http://localhost:5173` 可用时，应用会优先连接它
-- 这种方式适合日常开发前端界面和联调
+- When the frontend development server (`http://localhost:5173`) is available, the application will prioritize connecting to it.
+- This method is suitable for daily frontend UI development and integration testing.
 
-### 方式二：本地构建后启动
+### Method 2: Launch After Local Build
 
-先构建前端静态文件：
+Build the frontend static files first:
 
 ```powershell
 cd frontend
@@ -93,39 +87,39 @@ npm run build
 cd ..
 ```
 
-再启动应用：
+Then launch the application:
 
 ```powershell
 uv run python main.py
 ```
 
-说明：
+Notes:
 
-- 当前端开发服务器未启动时，应用会尝试读取 `frontend/dist/index.html`
-- 这种方式更接近实际发布后的运行形态
+- When the frontend development server is not running, the application will attempt to load `frontend/dist/index.html`.
+- This method more closely resembles the runtime behavior of the actual released application.
 
-### 方式三：浏览器模式
+### Method 3: Browser Mode
 
-部分情况下如果桌面模式受 WebView2 或本地环境影响，也可以尝试：
+In cases where desktop mode is affected by WebView2 or the local environment, you can also try:
 
 ```powershell
 uv run python main.py --browser
 ```
 
-## 测试
+## Testing
 
-建议优先运行正式测试目录：
+It is recommended to prioritize running the official test directory:
 
 ```powershell
 uv run pytest -q tests
 ```
 
-说明：
+Notes:
 
-- 仓库里还有一些本地实验性质内容，不建议直接用无参数 `pytest` 把所有目录一起扫
-- 如果后续准备公开协作，建议先把默认测试入口整理到稳定可直接通过的状态
+- The repository contains some experimental local content; running `pytest` without arguments (scanning all directories) is not recommended.
+- If you plan to open the project for collaboration later, it is recommended to organize the default test entry point into a stable state where tests pass reliably.
 
-## 打包
+## Packaging
 
 ### PyInstaller
 
@@ -139,79 +133,79 @@ uv run python pack_pyinstaller.py
 uv run python pack_nuitka.py
 ```
 
-说明：
+Note:
 
-- 打包脚本当前偏向作者本机环境，直接跨机器复用前可能还需要调整
+- The packaging scripts are currently tailored to the author's local environment; adjustments may be required before reusing them on other machines.
 
-## 项目结构
+## Project Structure
 
 ```text
-backend/    Python 后端、业务逻辑、数据与管理器
-frontend/   Vue 前端界面
-tests/      正式测试
-main.py     应用入口
+backend/    Python backend, business logic, data, and managers
+frontend/   Vue frontend interface
+tests/      Formal tests
+main.py     Application entry point
 ```
 
-## 当前状态
+## Current Status
 
-这个项目已经具备较完整的功能骨架，但仍在快速迭代中。对外公开前，建议优先补齐以下内容：
+The project has a fairly complete functional framework but is still undergoing rapid iteration. Before public release, it is recommended to prioritize the following:
 
-- 更完整的 README 截图和功能说明
-- 稳定的默认测试入口
-- 更清晰的版本号与更新说明同步策略
-- 更细致的 GitHub 发布流程与 issue / PR 模板
+- More comprehensive screenshots and feature descriptions in the README
+- A stable default test entry point
+- A clearer strategy for synchronizing version numbers and release notes
+- A more detailed GitHub release process and templates for issues/PRs
 
-## 开发计划
+## Development Plan
 
-下面这些内容仍在规划或开发中，优先级和具体实现方式后续可能会调整。
+The following items are currently in the planning or development stages; priorities and specific implementation methods are subject to change. ### Recent Improvements
 
-### 近期改进
+- Added multilingual support, gradually filling in interface text, prompts, and feature descriptions.
+- Optimized error messages, particularly for external tools, network requests, and AI-related errors.
+- Improved window scaling and responsiveness; checked for overflow issues in pop-ups, panels, and text after scaling.
+- Added "in-progress" states for buttons and asynchronous operations to reduce duplicate clicks and state ambiguity.
+- Enhanced path and environment detection, including support for Steam, Workshop, user data directories, and auto-enable logic.
+- Improved local storage security for sensitive configurations like passwords.
+- Fixed usability issues such as rules not applying immediately after generation and accidental deletion of default environments during database resets.
+- Refined local mod update detection, version difference logging, and synchronization timestamps.
+- Improved interaction details for coexisting mods, duplicate mods, disabled lists, tag input, context menus, and group navigation.
+- Optimized export capabilities, including game versioning, language pack filtering, supplementary info, and animated image support.
 
-- 多语言支持，逐步补齐界面文本、提示信息和功能说明
-- 优化错误提示，尤其是外部工具、网络请求和 AI 相关报错
-- 改进窗口缩放适配，检查各类弹窗、面板和文字缩放后的溢出问题
-- 补齐按钮和异步操作的进行中状态，减少重复点击和状态不清的问题
-- 强化路径识别和环境识别，包括 Steam、Workshop、用户数据目录和自动启用逻辑
-- 提升密码等敏感配置的本地存储安全性
-- 修复规则生成后无法即时应用、重置数据库误删默认环境等体验问题
-- 完善本地模组更新检测、版本差异记录和同步时间记录
-- 改进共存模组、重复模组、停用列表、标签输入、右键菜单和分组跳转等交互细节
-- 优化推荐导出能力，包括游戏版本、语言包过滤、附录信息和动图支持
+### Structural Evolution
 
-### 结构演进
+- Unified front-end and back-end data models to reduce redundant fields and conversion logic, enhancing reusability.
+- Adjusted code and directory structures to clarify functional boundaries and lower future maintenance costs.
+- Gradually transitioned from a "file-stacking" organization to a more stable modular/plugin-based architecture.
+- Optimized runtime memory usage to alleviate pressure caused by large lists, caching, and image-related features.
+- Advancing capabilities such as patch parsing, community data display, and name-translation linking in conjunction with data model restructuring.
+- Planning general features like settings search, new setting notifications, and default value validation.
+- Exploring MCP integration to facilitate future connections with external tools or automation capabilities.
 
-- 统一前后端数据模型，减少重复字段和重复转换逻辑，提升复用性
-- 调整代码与目录结构，让功能边界更清晰，降低后续维护成本
-- 逐步把功能组织方式从“按文件堆叠”整理为更稳定的模块化 / 插件化结构
-- 优化运行期内存占用，减少大型列表、缓存和图像相关功能带来的压力
-- 补丁解析、社区数据展示、名称与翻译联动等能力会结合数据模型重整一起推进
-- 规划设置搜索、新设置提示、默认值校验等通用基础能力
-- 探索 MCP 集成，方便后续和外部工具或自动化能力对接
+### AI & Translation Enhancements
 
-### AI 与翻译增强
+- AI-assisted completion for organizing search recommendations, groups, and tags.
+- Expanded mod description translation to key areas such as mod details and Workshop search results.
+- Added fallback support to use Workshop descriptions as AI input when local mod descriptions are insufficient. Mod translation language pack generation, supporting one-click structure generation, initial AI translation, and collaborative human proofreading
+- The language pack analysis/generation editor is designed for independent management while maintaining synchronization with the main manager
 
-- AI 辅助补全搜索推荐、分组、标签等整理能力
-- 模组介绍翻译扩展到模组详情和工坊搜索等主要使用区域
-- 当模组本地描述不足时，支持回退使用工坊描述作为 AI 输入
-- 模组翻译语言包生成，支持一键生成语言包结构、AI 初译和人工校对协作
-- 语言包分析 / 生成编辑器会考虑独立管理，同时保持和主管理器联动
+### Feature Extensions
 
-### 功能扩展
+- Continued enhancement of save file management capabilities, including export, modification, organization, and cleanup
+- Visualization of mod dependencies, presenting relationships—such as dependencies, prerequisites, and conflicts—via an intuitive star-map diagram
+- Visualization of definition dependencies, providing unified tracking across vanilla definitions, new mod additions, overrides, and patch modifications
+- Analysis of definition issues, checking for problems such as modification order conflicts, missing dependencies, and invalid references, while assisting in rule generation or optimizing automatic sorting
+- Mod definition editor, supporting the browsing and editing of common internal mod definitions and properties
+- Enhanced definition editor, supporting the creation of simple definition mods and patch mods, as well as content extensions based on dependency mods
+- Added support for multiplayer compatibility rules
 
-- 存档管理能力继续补齐，包括导出、修改、整理和清理
-- 模组依赖关系可视化，把依赖、前置、冲突等关系做成更直观的星空图
-- 定义依赖关系可视化，从原版定义到模组新增、覆盖、补丁修改做统一追踪
-- 定义问题分析，检查同一定义的修改顺序、缺失依赖、无效引用等问题，并辅助生成规则或优化自动排序
-- 模组定义编辑器，支持浏览和编辑模组内部常见定义与属性
-- 增强定义编辑器，支持生成简单定义模组、补丁模组，以及基于依赖模组扩展内容
-- 增加 Multiplayer 兼容度规则支持
+### Notes
 
-### 说明
+- Some items in the plan above are interconnected—such as definition visualization, issue analysis, sorting rule optimization, and editor capabilities—and essentially belong to the same broader feature stream
+- Certain items are better suited for implementation after refactoring, rather than being added piecemeal as scattered patches
+- Consequently, actual development will prioritize features that offer the greatest improvements to stability, maintainability, and user experience
 
-- 上面的计划里有些内容互相关联，例如定义可视化、定义问题分析、排序规则优化、编辑器能力，本质上属于同一条更大的功能线
-- 也有一些条目更适合在重构后统一做，而不是先零散补丁式堆功能
-- 因此实际推进时会优先做对稳定性、可维护性和用户体验提升最大的部分
 
 ## License
 
 MIT
+Send feedback
+Translation results available
